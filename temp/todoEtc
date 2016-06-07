@@ -1,0 +1,11 @@
+remove unused jars
+instead of fetching for last x days, it should fetch from last fetched time, so fb posts json pagination
+renamed Group entity to FBGroup on fears that it's conflicting with sql query, so check
+check alternative to starting quartz using a servlet
+quartz jars - c3p0-0.9.1.1.jar,log4j-1.2.16.jar,quartz-2.2.3.jar,quartz-jobs-2.2.3.jar,slf4j-api-1.7.7.jar,slf4j-log4j12-1.7.7.jar
+search with searchvo instead of string
+searching multiple strings with loop, change it to like SELECT * from fiberbox where field REGEXP '1740|1938|1940';
+code repetition in fecthGroups and fetchPosts methods, remove
+savePost, save object method repeating in dao and fbsearch classes, check
+in getAllSearchTexts, need searchtextvo instead of the entity
+deploy app online for continuous running, thus updation of posts

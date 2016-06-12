@@ -9,3 +9,7 @@ code repetition in fecthGroups and fetchPosts methods, remove
 savePost, save object method repeating in dao and fbsearch classes, check
 in getAllSearchTexts, need searchtextvo instead of the entity
 deploy app online for continuous running, thus updation of posts
+autorun tomcat, mysql on aws startup
+static ip, elastic ip
+detect, filter duplicate posts in search results, feature
+search cond., OR, ANY, ALL, exclude etc

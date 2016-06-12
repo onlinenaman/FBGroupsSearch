@@ -37,7 +37,7 @@ public class QuartzScheduler extends GenericServlet {
 		.withSchedule(
 //			CronScheduleBuilder.cronSchedule("0 0/3 * * * ?"))
 //			CronScheduleBuilder.cronSchedule("0 52 23 ? * SUN,MON,TUE,WED,THU,FRI,SAT"))
-			CronScheduleBuilder.dailyAtHourAndMinute(3, 59))
+			CronScheduleBuilder.dailyAtHourAndMinute(1, 51))
 				.build();
     	
     	//schedule it

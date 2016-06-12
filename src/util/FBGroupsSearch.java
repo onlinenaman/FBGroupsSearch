@@ -40,11 +40,8 @@ import dao.FADAO;
 public class FBGroupsSearch implements Job{
 	
 	private static final String PERSISTENCE_UNIT_NAME = "FBGroupsSearch";
-	private static final String FB_ACCESS_TOKEN = "1383045038690359|Ml1JiedUY9Dw5NfHHJNT1Vxu5jY";
-	private static final String FB_ACCESS_TOKEN_GAE = "EAACEdEose0cBAIc5GdW0T7kUOn171ya3lJyx8Q0I9VjHQBVMRkY8ZCRB6Vu21K7tiZCTarlJBjE54YqvzsKdDu06EAl7ypjl9ZAUujo1WstZApvd2zi4lDtHB7z0ZCEIBKMCLInqtBY177sRSSwTlaxdZCMtxSzBH0eFdIzW8euQZDZD";
-	private static final String FB_ACCESS_TOKEN_PAGE = "EAATp30Q9UDcBAFYi52ZCYyWSUL6NY6iMeiE75tpiCF3LzO5ynLXRzGRqj19EWHG6PNIQbwalw0zFLXgXHfy2ClNsoyIa6Vb9OTT2UsNJo54en4Q59TZCboZB6l9btCRbVhHRZAwl9ZB2AFViifQiK063ZBsLhtRBTLzmoTOuiRKAZDZD";
-	
-	private static final int NUMBER_OF_DAYS_OF_POSTS_TO_BE_FETCHED = 7;
+	public static String FB_ACCESS_TOKEN_PAGE = "EAATp30Q9UDcBAPAc3Yw5ciZB27TzkZCsh6ETpvWIXOTyQ4aSu6c34ecFVFIA85K3DK5PPhV5VXAlsNJ0DUNuJ7OsiXglEUrvvCRhma6k176ZA64qBf4DZCKYiScpSYe4VwenZCitBFlJ2f8Qg2UmyZBv4IzE2snUySPjgBGwGqrwZDZD";
+	public static int NUMBER_OF_DAYS_OF_POSTS_TO_BE_FETCHED = 7;
 	private static final int NUMBER_OF_POSTS_TO_BE_FETCHED_TempVar = 500;
 	
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);	

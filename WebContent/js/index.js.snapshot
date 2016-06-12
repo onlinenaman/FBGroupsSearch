@@ -50,9 +50,9 @@ app.controller('TypeaheadCtrl', function($scope, $cookieStore, $location, $windo
 
 		$http.get($location.path() + 'webservices/fetchPostsManually', {
 		      params: {
-		    	    numberOfDaysOfPostsToBeFetched: $scope.numberOfDaysOfPostsToBeFetched,
+			      	searchText: $scope.asyncSelected,
 			      	fb_access_token_page: $scope.fb_access_token_page,
-		            sensor: false
+		          sensor: false
 		        }
 		      }).
 	    success(function(data, status, headers, config) {

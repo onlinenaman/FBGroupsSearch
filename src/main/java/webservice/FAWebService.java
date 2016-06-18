@@ -31,39 +31,14 @@ import dao.FADAO;
 @Path("/")
 public class FAWebService {
 	
-//	// TODO - proper name, function etc
-//	// TODO - returning HashMap. Earlier was Account. Check
-//	@GET
-//	@Path("/getUser")
-//	@Produces({ MediaType.APPLICATION_JSON })
-//	public AccountVO getUser(@QueryParam("email") String email, @QueryParam("password") String password) {
-//		return FADAO.getUser(email, password);
-//	}
+	@POST
+	@Path("/loginWithFB")
+	@Consumes({MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public int loginWithFB(String fb_long_access_token) {
+		return FADAO.loginWithFB(fb_long_access_token);
+	}
 
-//	@POST
-//	@Path("/loginWithFB")
-//	@Consumes({MediaType.APPLICATION_JSON })
-//	@Produces({ MediaType.APPLICATION_JSON })
-//	public AccountVO loginWithFB(String accountVO) {
-//		JSONObject json = null;
-//		AccountVO empTemplate = new AccountVO();
-//		try {
-//			json = new JSONObject(accountVO);
-//			Object obj1 = json.getString("email");
-//			empTemplate.setEmail((String)obj1);
-//			Object obj2 = json.getString("sessionToken");
-//			empTemplate.setSessionToken((String)obj2);
-//			Object obj3 = json.getString("id");
-//			empTemplate.setId((String)obj3);
-//			Object obj4 = json.getString("name");
-//			empTemplate.setName((String)obj4);
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return FADAO.loginWithFB(empTemplate);
-//	}
-	
 	@GET
 	@Path("/getAllPosts")
 	@Produces({MediaType.APPLICATION_JSON })	  

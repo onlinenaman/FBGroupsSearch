@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="ui.bootstrap.demo">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>FeedAggregator</title>
+<!-- 
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/feeds.css" rel="stylesheet">
+<script src="js/angular.min.js"></script>
+<script src="js/ui-bootstrap-tpls.js"></script>
+-->
+<link href="css/index.css" rel="stylesheet">
+<link href="css/treeview.css" rel="stylesheet">
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="js/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.min.js"></script>
+<script src="js/ui-bootstrap-tpls.js"></script>
+<script src="js/index_3.js"></script>
+
+<link rel="shortcut icon" href="img/favicon.ico">
+</head>
+<body>
+
+<!-- TODO - move user, login etc to index controller -->
+<div id="TabsDemoCtrl" ng-controller="TabsDemoCtrl" data-ng-init="init()">
+
+<div ng-hide="user.sessionToken">
+	<div style="width:50%; display: inline-block; float: left">
+		Hello, please log in:
+		        <button class="fb-login-button" onclick="login()">Login with Facebook</button>
+		<form ng-submit="submit()">
+    <p><strong>Please Enter Your Email: </strong>
+    <input type="text" ng-model="email" name="username" size="25"
+    onkeypress="loginKeyPress(event);">
+    <p><p><strong>Please Enter Your Password: </strong>
+    <input type="password" ng-model="password" name="password" size="100"
+    onkeypress="loginKeyPress(event);">
+    <p><p>
+    <input id="loginSubmit" type="submit" value="Submit">
+    <input type="reset" value="Reset">
+		</form>
+	</div><div style="width:50%; display: inline-block">
+	Or, <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Sign up</button>
+	<hr>
+	<div collapse="isCollapsed">
+		<form ng-submit="signup()">
+	<p><strong>First Name: </strong>
+    <input type="text" ng-model="signupfirstname" name="signupfirstname" size="25">
+    <p><strong>Last Name: </strong>
+    <input type="text" ng-model="signuplastname" name="signuplastname" size="25">
+    <p><strong>User Name: </strong>
+    <input type="text" ng-model="signupemail" name="signupusername" size="25">
+    <p><strong>Password: </strong>
+    <input type="password" ng-model="signuppassword" name="signuppassword" size="100">
+    <p>
+    <p><strong>Confirm Password: </strong>
+    <input type="password" ng-model="confirmsignuppassword" name="confirmsignuppassword" size="100">
+    <p>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+		</form> 
+	</div>
+	</div>
+</div>
+    
+</div>
+</body>
+</html>

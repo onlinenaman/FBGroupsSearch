@@ -40,10 +40,11 @@ import dao.FADAO;
 public class FBGroupsSearch implements Job{
 	
 	private static final String PERSISTENCE_UNIT_NAME = "FBGroupsSearch";
-	public static String FB_ACCESS_TOKEN_PAGE = "1618864265094651|2cf742f8066248dfe71b06fbb7baa2b0";
-	public static int NUMBER_OF_DAYS_OF_POSTS_TO_BE_FETCHED = 3;
+	public static String FB_ACCESS_TOKEN_PAGE = "";
+	public static int NUMBER_OF_DAYS_OF_POSTS_TO_BE_FETCHED = 7;
 	private static final int NUMBER_OF_POSTS_TO_BE_FETCHED_TempVar = 500;
-	
+	public static final String FB_APP_ID = "1383045038690359";
+	public static final String FB_APP_SECRET = "a16edc7d8f94f3239046c018ea529816";	
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);	
 	private static SqlSessionFactory sqlMapper = null;
 	

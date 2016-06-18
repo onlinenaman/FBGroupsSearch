@@ -34,6 +34,18 @@
     	<version>1.9.2</version>
     </dependency>
     <dependency>
+    	<groupId>asm</groupId>
+    	<artifactId>asm</artifactId>
+    	<version>3.1</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.jvnet</groupId>
+    	<artifactId>mimepull</artifactId>
+    	<version>1.6</version>
+    </dependency>
+    
+    <!-- local JARs -->
+    <dependency>
     	<groupId>jersey-client-1.17.jar</groupId>
     	<artifactId>jersey-client-1.17.jar</artifactId>
     	<version>1.17</version>
@@ -75,18 +87,6 @@
     	<scope>system</scope>
     	<systemPath>${basedir}\src\main\webapp\WEB-INF\lib\asm-3.1.jar</systemPath>
     </dependency>
-    <dependency>
-    	<groupId>asm</groupId>
-    	<artifactId>asm</artifactId>
-    	<version>3.1</version>
-    </dependency>
-    <dependency>
-    	<groupId>org.jvnet</groupId>
-    	<artifactId>mimepull</artifactId>
-    	<version>1.6</version>
-    </dependency>
-    
-    <!-- local JARs -->
     <dependency>
     <groupId>c3p0-0.9.1.1.jar</groupId>
     <artifactId>c3p0-0.9.1.1.jar</artifactId>

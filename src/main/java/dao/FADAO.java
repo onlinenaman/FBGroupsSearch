@@ -1,12 +1,16 @@
 package dao;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.security.SecureRandom;
@@ -37,15 +41,52 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeComparator;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import util.FBGroupsSearch;
 import vo.PostVO;
+import webservice.FAWebService;
 
 public class FADAO {
 	
 	private static final String PERSISTENCE_UNIT_NAME = "FBGroupsSearch";
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);		
 	private static SqlSessionFactory sqlMapper = null;
+	
+	public static int loginWithFB (String fb_long_access_token) {	
+		String newUrl = "https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=" + FBGroupsSearch.FB_APP_ID + "&&client_secret=" + FBGroupsSearch.FB_APP_SECRET
+				+ "&fb_exchange_token=" + fb_long_access_token;
+ 		URL obj;
+ 		StringBuffer jsonResponse = new StringBuffer();
+		try {
+			obj = new URL(newUrl);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			con.addRequestProperty("User-Agent", "Mozilla/5.0");
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+	 				con.getInputStream()));
+	 		String inputLine;
+
+	 		while ((inputLine = in.readLine()) != null) {
+	 			jsonResponse.append(inputLine);
+	 		}
+	 		in.close();
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+ 		JSONObject jsonObj = null;
+ 		String[] resultSplited = jsonResponse.toString().split("&");
+ 		 
+        String access_token = resultSplited[0].split("=")[1];
+		FBGroupsSearch.FB_ACCESS_TOKEN_PAGE = access_token;
+		return 0;
+	}
 	
 	public static List<PostVO> getAllPosts(String searchText, String startDateString, String endDateString) {
 		

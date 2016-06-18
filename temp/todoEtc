@@ -13,3 +13,7 @@ autorun tomcat, mysql on aws startup
 static ip, elastic ip
 detect, filter duplicate posts in search results, feature
 search cond., OR, ANY, ALL, exclude etc
+empty string search bug fix
+simple, basic autocomplete for now, remove the existing
+instead of system scope for local jars, do local repo. something. use 26 voted answer from SO 10935135
+remove persistence.xml from unnecessary places

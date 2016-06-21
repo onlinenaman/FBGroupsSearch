@@ -71,7 +71,7 @@ public class FAWebService {
 	@Path("/getAllSearchTexts")
 	@Produces({MediaType.APPLICATION_JSON })	  
 	public List<SearchText> getAllSearchTexts(@QueryParam("searchText") String searchText) {
-		return FADAO.getAllSearchTexts();
+		return FADAO.getAllSearchTexts(searchText);
 	}
 
 } 

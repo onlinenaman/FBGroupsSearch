@@ -37,8 +37,8 @@ app.controller('TypeaheadCtrl', function($scope, $cookieStore, $location, $windo
 	    	$scope.posts = data;
 	    	angular.forEach($scope.posts, function(post, key) {
 	    		  post.groupID = post.id.split("_")[0];
-	    		  post.fbid = post.id.split("_")[1];	
-	    		  
+	    		  post.fbid = post.id.split("_")[1];
+	    		  post.updated_time = new Date(post.updated_time);
 	    		});
 	    }).
 	    error(function(data, status, headers, config) {
@@ -64,17 +64,6 @@ app.controller('TypeaheadCtrl', function($scope, $cookieStore, $location, $windo
 	    });
 		
 	};
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	// datepicker
 	
@@ -174,8 +163,5 @@ app.controller('TypeaheadCtrl', function($scope, $cookieStore, $location, $windo
 
 	    return '';
 	  }
-	  
-	  
-	  
 
 });

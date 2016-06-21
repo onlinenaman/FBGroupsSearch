@@ -56,7 +56,8 @@ public class FADAO {
 	private static final String PERSISTENCE_UNIT_NAME = "FBGroupsSearch";
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);		
 	private static SqlSessionFactory sqlMapper = null;
-	
+	private static final int MAX_NO_OF_ITEMS_FOR_AUTOCOMPLETE = 10;
+
 	public static int loginWithFB (String fb_long_access_token) {	
 		String newUrl = "https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=" + FBGroupsSearch.FB_APP_ID + "&&client_secret=" + FBGroupsSearch.FB_APP_SECRET
 				+ "&fb_exchange_token=" + fb_long_access_token;
@@ -105,7 +106,11 @@ public class FADAO {
 		if(searchText != null && searchText.length() > 0) {
 			SearchText searchText2 = new SearchText();
 			searchText2.setText(searchText);
-			savePost(searchText2);
+			try {
+				savePost(searchText2);
+			} catch (Exception e) {
+				System.out.print("search text already there");
+			}
 		}
 		
 		EntityManager em = factory.createEntityManager();
@@ -178,11 +183,12 @@ public class FADAO {
 		return postVOs;
 	}
 	
-	public static List<SearchText> getAllSearchTexts() {
+	public static List<SearchText> getAllSearchTexts(String searchText) {
 		EntityManager em = factory.createEntityManager();
-		Query checkEmailExists = em.createQuery("SELECT a FROM SearchText a");
+		Query checkEmailExists = em.createQuery("SELECT a FROM SearchText a WHERE lower(a.text) like lower(:searchText)");
+        checkEmailExists.setParameter("searchText", "%" + searchText + "%");
 		List<SearchText> feeds = (List<SearchText>) checkEmailExists.getResultList();
-		return feeds;
+		if(feeds.size() > 9) return feeds.subList(0, MAX_NO_OF_ITEMS_FOR_AUTOCOMPLETE); else return feeds;
 	}
 	
 	public static void savePost(Object post) {

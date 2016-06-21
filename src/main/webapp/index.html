@@ -123,8 +123,9 @@
 			<li ng-repeat="post in posts"
 				ng-click="updateArticlesList($parent.$index, $index)">
 				<a href="{{'https://m.facebook.com/permalink.php?story_fbid=' + post.fbid + '&id=' + post.groupID}}">
-				{{post.message.substring(0, 99)}} {{post.updated_time}} 
+				{{post.message.substring(0, 99)}}  
 				</a>
+				<div style="float: right;">{{post.updated_time | date:'medium'}}</div>
 			</li>
 		</ul>
 

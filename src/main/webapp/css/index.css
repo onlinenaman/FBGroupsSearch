@@ -149,3 +149,7 @@
   border-color: #ddd #ddd #ddd transparent;
   *border-left-color: #ffffff;
 }
+
+a:visited{
+     color: gray;
+}

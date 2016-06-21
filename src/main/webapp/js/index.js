@@ -27,6 +27,7 @@ app.controller('TypeaheadCtrl', function($scope, $cookieStore, $location, $windo
 		$http.get($location.path() + 'webservices/getAllPosts', {
 		      params: {
 			      	searchText: $scope.asyncSelected,
+			      	excludingKeywords: $scope.excludingKeywords,
 			      	startDate: $scope.dt,
 			      	endDate: $scope.endDate,
 		          sensor: false

@@ -17,3 +17,9 @@ empty string search bug fix
 simple, basic autocomplete for now, remove the existing
 instead of system scope for local jars, do local repo. something. use 26 voted answer from SO 10935135
 remove persistence.xml from unnecessary places
+filter posts on whether sell posts, price filter
+20.06 temptasks - token from db, search autocomplete correct, or; all etc search, viewed posts record; show, date display correct, maybe pagin.,
+sessiontoken.sessiontoken field name check,
+entity classes auto-detectable, no need to add in persistence.xml manually
+mybatis enable logging
+posts search; make query from mybatis or sql,

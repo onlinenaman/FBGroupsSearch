@@ -43,9 +43,10 @@ public class FAWebService {
 	@Path("/getAllPosts")
 	@Produces({MediaType.APPLICATION_JSON })	  
 	public List<PostVO> getAllArticlesForUser(@QueryParam("searchText") String searchText,
+			@QueryParam("excludingKeywords") String excludingKeywords,
 			@QueryParam("startDate") String startDate,
 			@QueryParam("endDate") String endDate) {
-		List<PostVO> postVOs = FADAO.getAllPosts(searchText, startDate, endDate);
+		List<PostVO> postVOs = FADAO.getAllPosts(searchText, excludingKeywords, startDate, endDate);
 		Collections.sort(postVOs, new Comparator<PostVO>(){
 			   public int compare(PostVO o1, PostVO o2){
 			      return  - o1.getUpdated_time().compareTo(o2.getUpdated_time());
@@ -62,7 +63,6 @@ public class FAWebService {
 			@QueryParam("fb_access_token_page") String fb_access_token_page) {		
 		FBGroupsSearch fbGroupsSearch = new FBGroupsSearch();
 		fbGroupsSearch.NUMBER_OF_DAYS_OF_POSTS_TO_BE_FETCHED = Integer.valueOf(numberOfDaysOfPostsToBeFetched);
-		fbGroupsSearch.FB_ACCESS_TOKEN_PAGE = fb_access_token_page;
 		fbGroupsSearch.m1();
 		return 0;
 	}

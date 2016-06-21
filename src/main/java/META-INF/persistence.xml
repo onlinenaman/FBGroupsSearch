@@ -8,6 +8,7 @@
     <class>model.Post</class>
     <class>model.FBGroup</class>
     <class>model.SearchText</class>
+    <class>model.SessionToken</class>
     <properties>
         <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
       <property name="javax.persistence.jdbc.url"

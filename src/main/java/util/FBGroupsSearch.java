@@ -40,7 +40,6 @@ import dao.FADAO;
 public class FBGroupsSearch implements Job{
 	
 	private static final String PERSISTENCE_UNIT_NAME = "FBGroupsSearch";
-	public static String FB_ACCESS_TOKEN_PAGE = "";
 	public static int NUMBER_OF_DAYS_OF_POSTS_TO_BE_FETCHED = 7;
 	private static final int NUMBER_OF_POSTS_TO_BE_FETCHED_TempVar = 500;
 	public static final String FB_APP_ID = "1383045038690359";
@@ -65,7 +64,7 @@ public class FBGroupsSearch implements Job{
 	
 	public static void fetchGroups() {
 
-		String newUrl = "https://graph.facebook.com/v2.3/me/groups?access_token=" + FB_ACCESS_TOKEN_PAGE;
+		String newUrl = "https://graph.facebook.com/v2.3/me/groups?access_token=" + FADAO.getSessionToken(1).getFbSessionToken();
  		URL obj;
  		StringBuffer jsonResponse = new StringBuffer();
 		try {
@@ -151,7 +150,7 @@ public class FBGroupsSearch implements Job{
 	}
 	
 	public static void fetchPostsForDates(FBGroup group, String s1, String s2) {
-		String newUrl = "https://graph.facebook.com/v2.3/" + group.getId() + "/feed?limit=" + NUMBER_OF_POSTS_TO_BE_FETCHED_TempVar + "&access_token=" + FB_ACCESS_TOKEN_PAGE + "&fields=message&since=" + s2 + "&until=" + s1;
+		String newUrl = "https://graph.facebook.com/v2.3/" + group.getId() + "/feed?limit=" + NUMBER_OF_POSTS_TO_BE_FETCHED_TempVar + "&access_token=" + FADAO.getSessionToken(1).getFbSessionToken() + "&fields=message&since=" + s2 + "&until=" + s1;
  		URL obj;
  		StringBuffer jsonResponse = new StringBuffer();
 		try {

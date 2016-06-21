@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.regex.Pattern;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -34,6 +35,7 @@ import javax.persistence.Query;
 
 import model.Post;
 import model.SearchText;
+import model.SessionToken;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -84,11 +86,21 @@ public class FADAO {
  		String[] resultSplited = jsonResponse.toString().split("&");
  		 
         String access_token = resultSplited[0].split("=")[1];
-		FBGroupsSearch.FB_ACCESS_TOKEN_PAGE = access_token;
+        SessionToken sessionToken = new SessionToken();
+        sessionToken.setId(1);
+        sessionToken.setFbSessionToken(access_token);
+
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+	    EntityManager em = factory.createEntityManager();
+	    em.getTransaction().begin();
+	    em.merge(sessionToken);
+	    em.flush();	    
+	    em.getTransaction().commit();
+	    em.close();
 		return 0;
 	}
 	
-	public static List<PostVO> getAllPosts(String searchText, String startDateString, String endDateString) {
+	public static List<PostVO> getAllPosts(String searchText, String excludingKeywords, String startDateString, String endDateString) {
 		
 		if(searchText != null && searchText.length() > 0) {
 			SearchText searchText2 = new SearchText();
@@ -98,6 +110,10 @@ public class FADAO {
 		
 		EntityManager em = factory.createEntityManager();
 		String[] sArray = searchText.split(" ");
+		String[] ekArray = null;
+		if (excludingKeywords != null) {
+			ekArray = excludingKeywords.split(" ");
+		}
 		
 		List<Post> feeds = new ArrayList<Post>();
 		
@@ -122,8 +138,24 @@ public class FADAO {
 					DateTime dateTime = new DateTime(date);
 					DateTime dateTime1 = new DateTime(date1);
 					DateTime dateTime2 = new DateTime(date2);
+					
+					boolean ekBoolean = false;
+					if(ekArray != null) {
+						try {
+							for (String string2 : ekArray) {
+								if (Pattern.compile(Pattern.quote(string2), Pattern.CASE_INSENSITIVE).matcher(post.getMessage()).find()) {
+									ekBoolean = true;
+									continue;
+								}
+							}
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
 					if (DateTimeComparator.getDateOnlyInstance().compare(dateTime, dateTime1) == -1 ||
-							DateTimeComparator.getDateOnlyInstance().compare(dateTime, dateTime2) == 1) {
+							DateTimeComparator.getDateOnlyInstance().compare(dateTime, dateTime2) == 1 || ekBoolean) {
 						iterator.remove();
 					}
 				
@@ -131,6 +163,8 @@ public class FADAO {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+				
 			}
 			
 			feeds.addAll(postsForString);
@@ -161,6 +195,12 @@ public class FADAO {
 	    em.getTransaction().commit();
 	    em.close();
 	}
-
+	
+	public static SessionToken getSessionToken(int id) {
+		EntityManager em = factory.createEntityManager();
+		SessionToken account = (SessionToken) em.find(SessionToken.class, id);
+        em.refresh(account);
+        return account;
+	}
 
 }

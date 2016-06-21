@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.PostMapper">
+	<!-- <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert
+		into contact (
+		id, lastName, firstName, phone, email
+		) values (
+		#{id}, #{lastName}, #{firstName}, #{phone}, #{email}
+		)
+	</insert>
+
+	<update id="update">
+		update contact set
+		lastName = #{lastName},
+		firstName = #{firstName},
+		phone = #{phone},
+		email = #{email}
+		where id = #{id}
+	</update>
+
+	<delete id="delete">
+		delete from contact
+		where id = #{value}
+	</delete> -->
+
+	<select id="searchPosts" resultType="post">
+		select
+		*
+		from post where message like 
+		<foreach item="item" index="index" collection="searchTexts" open="(" separator="," close=")">
+    	#{item}
+   		</foreach>
+	</select>
+
+	<!-- <select id="numberOfArticlesForDate" parameterType="map"  resultMap="feedTrendVO">
+		select
+		count(*) as noafd, date(faa.publishdate) as pd
+		from faarticle faa
+		where faa.feedid = #{feedID}
+		group by date(faa.publishdate)
+	</select>
+	
+	<resultMap type='vo.FeedTrendVO' id='feedTrendVO'>
+    <result property='intervalName' column='pd'/>
+    <result property='numberOfArticles' column='noafd'/>
+   </resultMap> -->
+
+</mapper>

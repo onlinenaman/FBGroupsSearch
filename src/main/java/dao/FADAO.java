@@ -46,11 +46,13 @@ import org.joda.time.DateTimeComparator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 import util.FBGroupsSearch;
 import vo.PostVO;
 import webservice.FAWebService;
 
+@Component
 public class FADAO {
 	
 	private static final String PERSISTENCE_UNIT_NAME = "FBGroupsSearch";

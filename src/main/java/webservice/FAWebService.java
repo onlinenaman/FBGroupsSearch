@@ -19,6 +19,8 @@ import org.apache.log4j.Logger;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import util.FBGroupsSearch;
 import vo.PostVO;
@@ -29,7 +31,11 @@ import dao.FADAO;
 
 
 @Path("/")
+@Service
 public class FAWebService {
+	
+	@Autowired
+	FADAO fadao;
 	
 	@POST
 	@Path("/loginWithFB")
@@ -46,6 +52,7 @@ public class FAWebService {
 			@QueryParam("excludingKeywords") String excludingKeywords,
 			@QueryParam("startDate") String startDate,
 			@QueryParam("endDate") String endDate) {
+		System.out.println("fadao = " + fadao);
 		List<PostVO> postVOs = FADAO.getAllPosts(searchText, excludingKeywords, startDate, endDate);
 		Collections.sort(postVOs, new Comparator<PostVO>(){
 			   public int compare(PostVO o1, PostVO o2){
